@@ -695,6 +695,20 @@ typedef struct {
   float ul_thr_ue;
   float dl_thr_ue;
   long pdsch_HARQ_ACK_Codebook;
+
+  bool is_GBR;
+  uint32_t guaranteed_tbs_bytes_ul;
+  uint32_t guaranteed_tbs_bytes_dl;
+
+  float avg_tbs_1s_dl;
+  float avg_tbs_1s_ul;
+
+  float avg_prbs_dl;
+  float avg_prbs_ul;
+
+  float avg_tbs_per_prb_dl;
+  float avg_tbs_per_prb_ul;
+
 } NR_UE_info_t;
 
 typedef struct {
@@ -840,6 +854,9 @@ typedef struct gNB_MAC_INST_s {
   int16_t frame;
 
   pthread_mutex_t sched_lock;
+
+  // following values are O-RAN controlled
+  int max_prbs_allocable_dl;
 
 } gNB_MAC_INST;
 

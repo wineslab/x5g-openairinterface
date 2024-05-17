@@ -2071,10 +2071,17 @@ add_executable(nr-softmodem
   ${OPENAIR_DIR}/common/utils/nr/nr_common.c
   ${PHY_INTERFACE_DIR}/queue_t.c
   ${OPENAIR1_DIR}/PHY/TOOLS/phy_scope_interface.c
+  ${OPENAIR2_DIR}/E2_AGENT/e2_agent_app.c
+  ${OPENAIR2_DIR}/E2_AGENT/e2_agent_app.h
+  ${OPENAIR2_DIR}/E2_AGENT/e2_message_handlers.c
+  ${OPENAIR2_DIR}/E2_AGENT/e2_message_handlers.h
+  ${OPENAIR2_DIR}/E2_AGENT/oai-oran-protolib/builds/ran_messages.pb-c.c
+  ${OPENAIR2_DIR}/E2_AGENT/oai-oran-protolib/builds/ran_messages.pb-c.h
   )
 
 include(${OPENAIR_DIR}/nfapi/CMakeLists.txt)
 
+set(PROTOBUF_LIB "protobuf-c")
 target_link_libraries(nr-softmodem PRIVATE
   -Wl,--start-group
   UTIL HASHTABLE SCTP_CLIENT SCHED_LIB SCHED_RU_LIB SCHED_NR_LIB PHY_NR PHY PHY_COMMON PHY_NR_COMMON PHY_RU GTPV1U SECURITY
@@ -2083,7 +2090,7 @@ target_link_libraries(nr-softmodem PRIVATE
   x2ap f1ap m2ap m3ap e1ap shlib_loader
   -Wl,--end-group z dl)
 
-target_link_libraries(nr-softmodem PRIVATE pthread m CONFIG_LIB rt sctp)
+target_link_libraries(nr-softmodem PRIVATE pthread m CONFIG_LIB rt sctp ${PROTOBUF_LIB})
 target_link_libraries(nr-softmodem PRIVATE ${T_LIB})
 target_link_libraries(nr-softmodem PRIVATE asn1_nr_rrc_hdrs asn1_lte_rrc_hdrs)
 target_link_libraries(nr-softmodem PRIVATE asn1_nr_rrc_hdrs asn1_lte_rrc_hdrs)
@@ -2149,7 +2156,7 @@ target_link_libraries(nr-uesoftmodem PRIVATE
   ITTI LIB_5GNAS_GNB LIB_NAS_SIMUE ${NAS_SIM_LIB} SIMU SIMU_ETH shlib_loader
   -Wl,--end-group z dl)
 
-target_link_libraries(nr-uesoftmodem PRIVATE pthread m CONFIG_LIB rt)
+target_link_libraries(nr-uesoftmodem PRIVATE pthread m CONFIG_LIB rt ${PROTOBUF_LIB})
 target_link_libraries(nr-uesoftmodem PRIVATE ${T_LIB})
 target_link_libraries(nr-uesoftmodem PRIVATE asn1_nr_rrc_hdrs asn1_lte_rrc_hdrs)
 

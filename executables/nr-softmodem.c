@@ -83,6 +83,7 @@ unsigned short config_frames[4] = {2,9,11,13};
 #ifdef ENABLE_AERIAL
 #include "nfapi/oai_integration/aerial/fapi_nvIPC.h"
 #endif
+#include <E2_AGENT/e2_agent_app.h>
 #ifdef E2_AGENT
 #include "openair2/E2AP/flexric/src/agent/e2_agent_api.h"
 #include "openair2/E2AP/RAN_FUNCTION/init_ran_func.h"
@@ -674,7 +675,9 @@ int main( int argc, char **argv ) {
 
   if (NFAPI_MODE != NFAPI_MODE_PNF) {
     int ret = create_gNB_tasks(node_type, uniqCfg);
+    printf("------------------ calling e2 agent init...\n");
     AssertFatal(ret == 0, "cannot create ITTI tasks\n");
+    e2_agent_init();
   }
 
   mlockall(MCL_CURRENT | MCL_FUTURE);

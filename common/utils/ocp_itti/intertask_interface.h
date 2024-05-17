@@ -286,6 +286,7 @@ typedef struct {
   TASK_DEF(TASK_BM, 200)              \
   TASK_DEF(TASK_PHY_ENB, 200)         \
   TASK_DEF(TASK_MAC_GNB, 200)         \
+  TASK_DEF(TASK_E2_AGENT, 200)        \
   TASK_DEF(TASK_RLC_ENB, 200)         \
   TASK_DEF(TASK_RRC_ENB_NB_IoT, 200)  \
   TASK_DEF(TASK_PDCP_ENB, 200)        \
